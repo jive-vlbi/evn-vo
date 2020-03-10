@@ -52,7 +52,6 @@
     <csvGrammar>
       <rowfilter procDef="//products#define">
 	<bind key="table">"evn.main"</bind>
-	<bind key="accref">"foobar"</bind>
       </rowfilter>
     </csvGrammar>
     <make table="main">
