@@ -52,7 +52,15 @@ fits.register_hdu(IdiHDU)
 os.environ['TZ'] = 'UTC'
 tm.tzset()
 
-def parse_fitsidi(dataset, idifiles, csvfile):
+def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
+    nparts = 0
+    for file in idifiles:
+        part = int(os.path.splitext(file)[1][4:])
+        if not part == nparts + 1:
+            raise RuntimeError("non-sequenctial FITS-IDI files")
+        nparts += 1
+        continue
+
     hdulist = fits.open(idifiles[0])
     #hdulist.info()
 
@@ -181,9 +189,9 @@ def parse_fitsidi(dataset, idifiles, csvfile):
     calib_level = 1
 
     obs_collection = "EVN"
-    obs_publisher_did = "ivo://jive.eu?" + dataset
+    obs_publisher_did = "ivo://jive.eu/~?" + exp_id + product_id
 
-    access_url = "http://archive.jive.nl/exp/" + dataset + "/fits"
+    access_url = "http://archive.jive.nl/exp/" + exp_id + "/fits"
     access_format = "application/x-fits-idi"
 
     o_ucd = "stat.uncalib"
@@ -219,6 +227,7 @@ def parse_fitsidi(dataset, idifiles, csvfile):
     record['o_ucd'] = o_ucd
     record['pol_xel'] = pol_xel
     record['instrument_name'] = instrument_name
+    record['_nparts'] = nparts
 
     fieldnames = record.keys()
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -259,6 +268,8 @@ def parse_fitsidi(dataset, idifiles, csvfile):
     return
 
 idifiles = sys.argv[1:]
-dataset = os.path.split(os.path.split(os.path.split(idifiles[0])[0])[0])[1]
+exp_id = os.path.split(os.path.split(os.path.split(idifiles[0])[0])[0])[1]
+product_id = os.path.splitext(os.path.basename(idifiles[0]))[0]
+product_id = product_id[product_id.find('_'):]
 csvfile = open('records.csv', 'a')
-parse_fitsidi(dataset, idifiles, csvfile)
+parse_fitsidi(exp_id, product_id, idifiles, csvfile)
