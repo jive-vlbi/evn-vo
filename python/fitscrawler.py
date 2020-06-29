@@ -161,25 +161,34 @@ def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
     em_xel = hdu.header['NO_BAND'] * hdu.header['NO_CHAN']
     pol_xel = hdu.header['NO_STKD']
 
+    prev_source_id = -1
+    prev_jd = 0.0
+    jd_max = (max_source_id + 1) * [0.0]
+    jd_min = (max_source_id + 1) * [1e100]
     nvis = (max_source_id + 1) * [0]
     inttim = (max_source_id + 1) * [0.0]
     inttim_min = (max_source_id + 1) * [1e100]
     inttim_max = (max_source_id + 1) * [0.0]
-    jd_max = (max_source_id + 1) * [0.0]
-    jd_min = (max_source_id + 1) * [1e100]
     access_estsize = 0
     for file in idifiles:
         hdulist = fits.open(file)
         hdu = hdulist['UV_DATA']
         for row in hdu.data:
-            source_id = row['SOURCE_ID']
-            nvis[source_id] += 1
-            inttim[source_id] += row['INTTIM']
-            inttim_min[source_id] = min(inttim_min[source_id], row['INTTIM'])
-            inttim_max[source_id] = max(inttim_max[source_id], row['INTTIM'])
+            # Skip bogus rows
+            if row['DATE'] == 0.0 and row['TIME'] == 0.0:
+                continue
             jd = row['DATE'] + row['TIME']
             jd_min[source_id] = min(jd_min[source_id], jd)
             jd_max[source_id] = max(jd_max[source_id], jd)
+            source_id = row['SOURCE_ID']
+            if source_id != prev_source_id or jd != prev_jd:
+                nvis[source_id] += 1
+                inttim[source_id] += row['INTTIM']
+                prev_source_id = source_id
+                prev_jd = jd
+                pass
+            inttim_min[source_id] = min(inttim_min[source_id], row['INTTIM'])
+            inttim_max[source_id] = max(inttim_max[source_id], row['INTTIM'])
             continue
         access_estsize += (os.path.getsize(file) + 999) // 1000
         continue
