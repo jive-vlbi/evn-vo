@@ -75,7 +75,13 @@ def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
 
     ref_freq = hdu.header['REF_FREQ']
     for row in hdu.data:
-        zipped = zip(row['BANDFREQ'], row['SIDEBAND'], row['TOTAL_BANDWIDTH'])
+        if hdu.header['NO_BAND'] == 1:
+            zipped = zip([row['BANDFREQ']], [row['SIDEBAND']],
+                         [row['TOTAL_BANDWIDTH']])
+        else:
+            zipped = zip(row['BANDFREQ'], row['SIDEBAND'],
+                         row['TOTAL_BANDWIDTH'])
+            pass
         for band in zipped:
             if band[1]:
                 f_min = min(f_min, ref_freq + band[0])
