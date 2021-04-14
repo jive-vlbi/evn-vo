@@ -70,7 +70,7 @@
       <rowfilter name="makeAccref">
 	<setup>
 	  <code>
-	    import urlparse
+	    import urllib
 	  </code>
 	</setup>
 	<code>
@@ -90,7 +90,7 @@
       <rowmaker idmaps="*">
 	<var key="s_region">pgsphere.SCircle(pgsphere.SPoint.fromDegrees(float(@s_ra), float(@s_dec)), float(@s_fov)).asPoly()</var>
 	<var key="access_url">makeAbsoluteURL(
-		"\rdId/dl/dlmeta?ID="+urllib.quote(@pubDID))</var>
+		"\rdId/dl/dlmeta?ID="+urllib.parse.quote(@pubDID))</var>
       </rowmaker>
     </make>
   </data>
