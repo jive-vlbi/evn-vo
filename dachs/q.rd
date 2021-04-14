@@ -95,12 +95,6 @@
     </make>
   </data>
 
-  <service id="vis">
-    <meta name="title">EVN Visibility Data</meta>
-    <dbCore queriedTable="main">
-    </dbCore>
-  </service>
-
   <service id="dl" allowed="dlmeta">
     <meta name="title">EVN Visibility Datalink Service</meta>
     <datalinkCore>
