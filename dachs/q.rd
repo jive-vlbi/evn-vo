@@ -45,7 +45,7 @@
 	preview="NULL"
 	>//obscore#publish</mixin>
 
-    <column name="_nparts" type="smallint" required="True"
+    <column name="_nparts" type="smallint" required="True" hidden="True"
 	    ucd="meta.number" verbLevel="30"/>
 
     <column original="accref" displayHint=""/>
