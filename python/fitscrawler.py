@@ -12,28 +12,94 @@ import numpy as np
 import vlbi
 
 diameters = {
+    # EVN and associates
     'AR': 305,
     'BD': 32,
     'CM': 32,
+    'DA': 25,
+    'DE': 25,
+    'DW': 25,
     'EB': 100,
     'EF': 100,
+    'EV': 70,		# Evpatoria
     'HH': 26,
+    'IB': 16,
     'IR': 32,
     'JB': 76,
-    'NT': 32,
+    'JL': 76,
+    'JV': 30.82,	# Geometric mean for Joddrell Mark2
+    'KM': 40,
+    'KN': 25,
+    'KS': 34,		# Kashima
+    'KT': 22,
+    'KU': 22,
+    'KY': 22,
+    'MA': 20,		# Matera
     'MC': 32,
+    'MH': 14,
+    'NK': 32,
+    'NT': 32,
     'O6': 20,
     'O8': 25,
     'ON': 25,
+    'PI': 25,
     'RO': 70,
     'SH': 25,
     'SR': 64,
     'SV': 32,
     'T6': 65,
+    'TA': 25,
     'TR': 32,
     'UR': 25,
+    'VM': 20,		# VERA Mizusawa
+    'VS': 20,		# VERA Ishigakijima
+    'WB': 25,
+    'WN': 13,
+    'WZ': 20,
+    'YM': 32,		# Yamaguchi
     'YS': 40,
     'ZC': 32,
+
+    # VLBA
+    'BR': 25,
+    'FD': 25,
+    'GB': 104.88,	# Geometric mean for Green Bank
+    'HN': 25,
+    'KP': 25,
+    'LA': 25,
+    'MK': 25,
+    'NL': 25,
+    'OV': 25,
+    'PT': 25,
+    'SC': 25,
+    'YY': 0,
+
+    # LBA
+    'AT': 0,
+    'CD': 30,
+    'HO': 26,
+    'KE': 12,
+    'MP': 22,
+    'PA': 64,
+    'TD': 34,
+    'TI': 70,
+    'WA': 30,
+    'YG': 12,
+
+    # Test stations
+    'ED': 0,
+    'EX': 0,
+    'HD': 0,
+    'HX': 0,
+    'JD': 0,
+    'KD': 0,
+    'MD': 0,
+    'ND': 0,
+    'OD': 0,
+    'OX': 0,
+    'SD': 0,
+    'WD': 0,
+    'YD': 0,
     }
 
 class IdiHDU(fits.PrimaryHDU):
