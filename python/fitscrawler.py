@@ -284,6 +284,7 @@ def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
     return
 
 idifiles = sys.argv[1:]
+idifiles = sorted(idifiles, key=lambda s: int(s[s.rfind('IDI') + 3:]))
 exp_id = os.path.split(os.path.split(os.path.split(idifiles[0])[0])[0])[1]
 product_id = os.path.splitext(os.path.basename(idifiles[0]))[0]
 product_id = product_id[product_id.find('_'):]
