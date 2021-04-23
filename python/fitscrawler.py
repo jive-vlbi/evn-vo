@@ -177,6 +177,8 @@ def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
             # Skip bogus rows
             if row['DATE'] == 0.0 and row['TIME'] == 0.0:
                 continue
+            if row['SOURCE_ID'] < 0 or row['SOURCE_ID'] > max_source_id:
+                continue
             jd = row['DATE'] + row['TIME']
             jd_min[source_id] = min(jd_min[source_id], jd)
             jd_max[source_id] = max(jd_max[source_id], jd)
