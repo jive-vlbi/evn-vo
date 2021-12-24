@@ -1,5 +1,6 @@
 import csv
 import os
+import urllib
 import sys
 import time as tm
 
@@ -288,7 +289,7 @@ def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
     record['target_name'] = None
     record['obs_id'] = obs_id
     record['obs_collection'] = obs_collection
-    record['obs_publisher_did'] = obs_publisher_did
+    record['obs_publisher_did'] = None
     record['access_url'] = access_url
     record['access_format'] = access_format
     record['access_estsize'] = access_estsize
@@ -347,6 +348,9 @@ def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
         record['t_max'] = t_max[source_id].value
         record['t_exptime'] = t_exptime[source_id].to_value(u.s)
         record['t_resolution'] = t_resolution[source_id].to_value(u.s)
+        target = urllib.parse.quote(target_name[source_id])
+        freq = "%.2fMHz" % f_min.to_value(u.MHz)
+        record['obs_publisher_did'] = obs_publisher_did + '_' + target + '_' + freq
         writer.writerow(record)
         continue
     return
