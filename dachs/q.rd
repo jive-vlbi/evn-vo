@@ -106,11 +106,10 @@
 	      nparts=row['_nparts']
 	      break
 	  accref = getAccrefFromStandardPubDID(descriptor.pubDID)
-	  pos = accref.find('_', accref.find('_') + 1)
-	  exp_id = accref[0:pos]
-	  product_id = accref[pos:]
-	  pos = accref.find('_')
-	  exp = accref[0:pos]
+	  components = accref.split('_')
+	  exp = components[0]
+	  exp_id = exp + '_' + components[1]
+	  product_id ='_' + components[2] + '_' + components[3]
 	  baseurl = "http://archive.jive.nl/exp/" + exp_id + "/fits/" + exp.lower() + product_id + ".IDI"
 	  descriptor.suppressAutoLinks = True
 	  for part in range(nparts):
