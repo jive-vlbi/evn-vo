@@ -1,13 +1,24 @@
 <resource schema="evn">
-  <meta name="title">EVN archive</meta>
-  <meta name="coverage">
-    <meta name="profile">AllSky J2000</meta>
-    <meta name="waveband">Radio</meta>
+  <meta name="creationDate">2022-01-11T12:23:31Z</meta>
+  <meta name="title">EVN Data Archive</meta>
+  <meta name="description">
+    The data archive of the European VLBI Network (EVN).  This archive
+    contains Very Long Baseline Interferometry (VLBI) visibility data
+    from observations of the EVN, the most sensitive VLBI array in the
+    world.  In addition, the archive makes available various
+    correlator and pipeline products that give an impression of the
+    data quality. In some cases, preliminary images of calibrators and
+    target sources are also available.
   </meta>
+  <meta name="subject">Very Long Baseline Interferometry</meta>
+  <meta name="instrument">EVN</meta>
+  <meta name="facility">EVN</meta>
+  <meta name="contentLevel">Research</meta>
+  <meta name="coverage.waveband">Radio</meta>
 
   <table id="main" onDisk="True" namePath="//obscore#ObsCore">
     <meta name="description">
-      Visibility data from the EVN archive.
+      Visibility data from the EVN Data Archive.
     </meta>
     <meta name="_associatedDatalinkService">
       <meta name="serviceId">dl</meta>
@@ -93,6 +104,7 @@
 		"\rdId/dl/dlmeta?ID="+urllib.parse.quote(@pubDID))</var>
       </rowmaker>
     </make>
+    <publish/>
   </data>
 
   <service id="dl" allowed="dlmeta">
