@@ -112,8 +112,9 @@
     <datalinkCore>
       <metaMaker>
 	<code>
+	  pubdid = descriptor.pubDID.replace('%', '_')
 	  with base.getTableConn() as conn:
-	    query = "SELECT * from %s WHERE obs_publisher_did='%s'" % (descriptor.sourceTable, descriptor.pubDID)
+	    query = "SELECT * from %s WHERE obs_publisher_did LIKE '%s'" % (descriptor.sourceTable, pubdid)
 	    for row in conn.queryToDicts(query):
 	      nparts=row['_nparts']
 	      break
