@@ -10,7 +10,7 @@
     data quality. In some cases, preliminary images of calibrators and
     target sources are also available.
   </meta>
-  <meta name="subject">Very Long Baseline Interferometry</meta>
+  <meta name="subject">very-long-baseline-interferometry</meta>
   <meta name="instrument">EVN</meta>
   <meta name="facility">EVN</meta>
   <meta name="contentLevel">Research</meta>
@@ -104,7 +104,6 @@
 		"\rdId/dl/dlmeta?ID="+urllib.parse.quote(@pubDID))</var>
       </rowmaker>
     </make>
-    <publish/>
   </data>
 
   <service id="dl" allowed="dlmeta">
