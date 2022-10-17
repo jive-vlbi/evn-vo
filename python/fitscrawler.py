@@ -9,6 +9,7 @@ from astropy import constants as const
 from astropy import units as u
 from astropy.time import Time
 import numpy as np
+import pandas
 
 import vlbi
 
@@ -361,5 +362,9 @@ idifiles = sorted(idifiles, key=lambda s: int(s[s.rfind('IDI') + 3:]))
 exp_id = os.path.split(os.path.split(os.path.split(idifiles[0])[0])[0])[1]
 product_id = os.path.splitext(os.path.basename(idifiles[0]))[0]
 product_id = product_id[product_id.find('_'):]
-csvfile = open('records.csv', 'a')
-parse_fitsidi(exp_id, product_id, idifiles, csvfile)
+df = pandas.read_csv('records.csv')
+if df[df['_product_id'] == exp_id + product_id].empty:
+    csvfile = open('records.csv', 'a')
+    parse_fitsidi(exp_id, product_id, idifiles, csvfile)
+    print(exp_id + product_id)
+    pass
