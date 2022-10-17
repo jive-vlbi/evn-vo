@@ -313,6 +313,7 @@ def parse_fitsidi(exp_id, product_id, idifiles, csvfile):
     record['pol_xel'] = pol_xel
     record['instrument_name'] = instrument_name
     record['_nparts'] = nparts
+    record['_product_id'] = exp_id + product_id
 
     fieldnames = record.keys()
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
